@@ -14,7 +14,6 @@
             <b-table striped hover :items="info2"></b-table>
           </div>
         </b-col>
-        
       </b-row>
     </b-container>
   </div>
@@ -30,9 +29,12 @@ export default {
     }
   },
   mounted () {
-    axios.get('https://guarded-depths.com/referrals/')
-      .then(response => (this.info = response.data.Referral), axios.get('https://guarded-depths.com/referral_tickets/')
-      .then(response => (this.info2 = response.data.Referral)))
+    var self = this;
+    setInterval(function(){
+      axios.get('https://guarded-depths.com/referrals/')
+        .then(response => (self.info = response.data.Referral), axios.get('https://guarded-depths.com/referral_tickets/')
+        .then(response => (self.info2 = response.data.Referral)));
+    }, 3000);
       
   }
 }
